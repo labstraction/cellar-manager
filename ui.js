@@ -1,12 +1,21 @@
 class UI{
     constructor(){
-        this.cellar = new Cellar();
+
+        const data = Storage.loadData();
+        if (data !== null) {
+            this.cellar = Cellar.fromDbObject(data);
+        } else {
+            this.cellar = new Cellar();
+        }
+        
     }
 
     startApp(){
         while (true) {
 
             const firstChoice = prompt(
+                    "Ciao utente la nostra cantina ha a disposizine " + this.cellar.beverageCount + 
+                    " bevande.\n" + 
                     "Hai 4 opzioni:\n" +
                     "1)Guarda la lista delle bevande\n" +
                     "2)Aggiungi una bevanda\n" +
@@ -47,17 +56,19 @@ class UI{
         const maker = prompt('Inserisci il produttore');
         const vol = parseInt(prompt('Inserisci gradazione alcolica'));
         const type = prompt('Inserisci il tipo');
+        const dop = prompt('Inserisci la data (gg/mm/yyyy)');
 
         if (insertChoice === 'birra') {
             const malt = prompt('Inserisci il tipo di malto');
-            const beer = new Beer(name, maker, vol, type, malt);
+            const beer = new Beer(name, maker, vol, type, dop, malt);
             this.cellar.addBeverage(beer);
         } else {
             const region = prompt('Inserisci la regione');
             const vine = prompt('Inserisci il vitigno');
-            const wine = new Wine(name, maker, vol, type, region, vine);
+            const wine = new Wine(name, maker, vol, type,dop, region, vine);
             this.cellar.addBeverage(wine);
         }
+        Storage.saveData(this.cellar.beverageArray);
     }
     
     deleteBeverage(){
@@ -65,6 +76,10 @@ class UI{
         const i = humanIndex -1;
 
         this.cellar.removeBeverage(i);
-        console.log(this.cellar)
+
+        Storage.saveData(this.cellar.beverageArray);
     }
+
+
+
 }

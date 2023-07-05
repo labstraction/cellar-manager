@@ -1,7 +1,7 @@
 class Wine extends Beverage{
 
-    constructor(name, maker, vol, type, region, vine){
-        super(name, maker, vol, type);
+    constructor(name, maker, vol, type, dop, region, vine){
+        super(name, maker, vol, type, dop);
         this.region = region;
         this.vine = vine;
     }

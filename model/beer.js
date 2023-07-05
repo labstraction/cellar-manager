@@ -1,7 +1,7 @@
 class Beer extends Beverage{
 
-    constructor(name, maker, vol, type, malt){
-        super(name, maker, vol, type);
+    constructor(name, maker, vol, type, dop, malt){
+        super(name, maker, vol, type, dop);
         this.malt = malt;    
     }
 
