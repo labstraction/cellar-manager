@@ -10,7 +10,7 @@ class Cellar {
             const element = this.beverageArray[i];
             const humanIndex = i+1;
             allBeveragesString += humanIndex + ') ' + element.toString();
-            allBeveragesString += '-----------------------';
+            allBeveragesString += '-----------------------\n';
         }
         return allBeveragesString;
     }

@@ -35,14 +35,29 @@ class UI{
     }
 
     insertBeverage(){
+
+        const insertChoice = prompt('Vuoi inserire una birra o un vino');
+
+        if (insertChoice !== 'birra' && insertChoice !== 'vino') {
+            alert('non puoi inserire altri tipi di bevande');
+            return;
+        }
+
         const name = prompt('Inserisci il nome');
         const maker = prompt('Inserisci il produttore');
         const vol = parseInt(prompt('Inserisci gradazione alcolica'));
         const type = prompt('Inserisci il tipo');
 
-        const beverage = new Beverage(name, maker, vol, type);
-        this.cellar.addBeverage(beverage);
-        console.log(this.cellar)
+        if (insertChoice === 'birra') {
+            const malt = prompt('Inserisci il tipo di malto');
+            const beer = new Beer(name, maker, vol, type, malt);
+            this.cellar.addBeverage(beer);
+        } else {
+            const region = prompt('Inserisci la regione');
+            const vine = prompt('Inserisci il vitigno');
+            const wine = new Wine(name, maker, vol, type, region, vine);
+            this.cellar.addBeverage(wine);
+        }
     }
     
     deleteBeverage(){
